@@ -38,14 +38,14 @@ export default function (io: SocketIOServer) {
             const user = getUser({id: socketId});
 
             socket.broadcast.to(user!.room!).emit('callMade', {
-                offer: data.offer,
-                room: data.to
+                signal: data.signalData,
+                from: data.from
             })
         });
-        socket.on('makeAnswer', data => {
-            socket.to(data.to).emit("answerMade", {
-                socket: socketId,
-                answer: data.answer
+        socket.on('answerCall', data => {
+            const user = getUser({id: socketId});
+            socket.to(user!.room!).emit("callAccepted", {
+                signal: data.signal
             })
         })
 

@@ -27,7 +27,6 @@ export const removeUser = ({id}: UserData) => {
 }
 
 export const getUser = ({id}: UserData) => {
-    console.log(users);
     return users.find((user) => user?.id === id);
 };
 export const getUsersInRoom = ({room}: UserData) => users
